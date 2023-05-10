@@ -24,8 +24,8 @@
                   <a class="nav-link" href="{{ route('site.faq') }}"> How </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span>Wallet</span> <img src="images/wallet.png" alt="" />
+                  <a class="nav-link" href="{{ route('posts.index') }}">
+                    <span>Posts</span> <img src="images/wallet.png" alt="" />
                   </a>
                 </li>
                 <li class="nav-item {{ Route::currentRouteName() == 'site.login' ? 'active' : '' }}">
