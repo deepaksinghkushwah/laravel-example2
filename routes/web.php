@@ -22,13 +22,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('site.home');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware("deepak");
-Route::get('/posts/show/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store'])->name('post.store');
-Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
-Route::patch('/posts/edit', [PostController::class, 'update'])->name('post.update');
-Route::delete("/posts/delete/{post}", [PostController::class, 'destroy'])->name('posts.delete');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/posts/show/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+    Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('posts.edit');
+    Route::patch('/posts/edit', [PostController::class, 'update'])->name('post.update');
+    Route::delete("/posts/delete/{post}", [PostController::class, 'destroy'])->name('posts.delete');
+});
+
 
 Route::get('/faq', function () {
     return view('site.faq');
@@ -45,8 +48,8 @@ Route::match(['GET', 'POST'], '/user/signup', [UserController::class, 'signup'])
 // logout
 Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 // member home
-Route::get('/user/home', [UserController::class, 'memberHome'])->name('user.home')->middleware(["auth","deepak","admin"]);
+Route::get('/user/home', [UserController::class, 'memberHome'])->name('user.home')->middleware(["auth", "deepak", "admin"]);
 
-Route::get("/tick-check/{name}", function(Request $request){
+Route::get("/tick-check/{name}", function (Request $request) {
     return $request->input("name");
 })->middleware("customTick");
