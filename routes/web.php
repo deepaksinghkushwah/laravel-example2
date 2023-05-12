@@ -44,3 +44,7 @@ Route::match(['GET', 'POST'], '/user/login', [UserController::class, 'login'])->
 Route::match(['GET', 'POST'], '/user/signup', [UserController::class, 'signup'])->name('user.signup');
 // logout
 Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+
+Route::get("/tick-check/{name}", function(Request $request){
+    return $request->input("name");
+})->middleware("customTick");
