@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('site.home');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware("deepak");
 Route::get('/posts/show/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('post.store');
@@ -39,11 +39,13 @@ Route::get('/about', function () {
 })->name('site.about');
 
 // login
-Route::match(['GET', 'POST'], '/user/login', [UserController::class, 'login'])->name('user.login');
+Route::match(['GET', 'POST'], '/user/login', [UserController::class, 'login'])->name('login');
 // register
 Route::match(['GET', 'POST'], '/user/signup', [UserController::class, 'signup'])->name('user.signup');
 // logout
 Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+// member home
+Route::get('/user/home', [UserController::class, 'memberHome'])->name('user.home')->middleware(["auth","deepak","admin"]);
 
 Route::get("/tick-check/{name}", function(Request $request){
     return $request->input("name");

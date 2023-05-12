@@ -47,4 +47,8 @@ class UserController extends Controller
         Auth::logout();
         return redirect()->route('site.home')->with('success','User logged out');
     }
+
+    public function memberHome(){
+        return view('user.home');
+    }
 }

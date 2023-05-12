@@ -2,7 +2,7 @@
 @section("title",'Login')
 @section('content')
 
-<form action="{{ route('user.login') }}" method="POST">
+<form action="{{ route('login') }}" method="POST">
     @csrf
     @include('layouts.form-errors')
     <table class="table table-bordered">

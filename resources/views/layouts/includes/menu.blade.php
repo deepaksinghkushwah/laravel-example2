@@ -32,8 +32,8 @@
                             <a class="nav-link" href="{{ route('user.logout') }}"> Logout</a>
                         </li>
                         @else
-                        <li class="nav-item {{ Route::currentRouteName() == 'user.login' ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('user.login') }}"> Login</a>
+                        <li class="nav-item {{ Route::currentRouteName() == 'login' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('login') }}"> Login</a>
                         </li>
                         <li class="nav-item {{ Route::currentRouteName() == 'user.signup' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('user.signup') }}"> Sign Up</a>

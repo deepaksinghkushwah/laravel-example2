@@ -51,6 +51,7 @@
         <div class="how_container">
 
             <div class="detail-box">
+                @include('layouts.message')
                 @yield("content")
             </div>
 
