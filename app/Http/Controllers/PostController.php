@@ -47,7 +47,7 @@ class PostController extends Controller
             abort(403);
         }
         // or use any one
-        Gate::authorize("canEditPost", $post);
+        // Gate::authorize("canEditPost", $post);
 
 
         return view('post.edit',['post' => $post]);
