@@ -35,7 +35,10 @@ class UserController extends Controller
                 'password' => 'required',
             ]);
             $user = Auth::getProvider()->retrieveByCredentials($validate);
-            Auth::login($user);
+            //Auth::login($user);
+            if(Auth::attempt($validate)){
+                $request->session()->regenerate();
+            }
             return redirect()->route('site.home')->with('success','User logged in');
         } else {
             return view('user.login');
