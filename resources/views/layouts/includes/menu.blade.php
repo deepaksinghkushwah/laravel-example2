@@ -40,6 +40,14 @@
                         </li>
                         @endauth
 
+                        @can("isAdmin")
+                        <li class="nav-item ">
+                            <a class="nav-link" href="http://www.google.com"> Google If Admin</a>
+                        </li>
+                        @endcan
+
+
+
                     </ul>
                     <div class="user_option">
                         <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">

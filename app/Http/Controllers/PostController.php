@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -41,6 +43,13 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
+        if(!Gate::allows("canEditPost", $post)){
+            abort(403);
+        }
+        // or use any one
+        Gate::authorize("canEditPost", $post);
+
+
         return view('post.edit',['post' => $post]);
     }
 
