@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        App\Models\Post::class => App\Policies\PostPolicy::class,
     ];
 
     /**
@@ -25,7 +26,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
         Gate::define("isAdmin", function(User $user){
             return $user->role == "Admin";
         });
@@ -33,10 +35,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define("isRegistered", function(User $user){
             return $user->role == "Registered";
         });
-
-        Gate::define("canEditPost", function(User $user, Post $post){
-            return $user->id == $post->user_id;
-        });
-
     }
 }

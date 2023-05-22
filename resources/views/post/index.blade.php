@@ -10,6 +10,7 @@
             <th>#ID</th>
             <th>Title</th>
             <th>Status</th>
+            <th>UserID</th>
             <th width="20%"></th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
                 </a>
             </td>
             <td>{{ $row->status == 1 ? 'active' : 'inactive' }}</td>
+            <td>{{ $row->user->email }}</td>
             <td class="input-group">
                 <a class="btn btn-sm btn-info" href="{{ route('posts.edit', $row->id) }}">Edit</a>&nbsp;
                 <form action="{{ route('posts.delete', $row->id) }}" method="post">
@@ -32,6 +34,7 @@
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
             </td>
+
         </tr>
         @endforeach
         @endif

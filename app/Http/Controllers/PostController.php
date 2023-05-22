@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Policies\PostPolicy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
+        $this->authorize('view',[$post]);
         return view('post.show',['post' => $post]);
     }
 
@@ -43,9 +45,9 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
-        if(!Gate::allows("canEditPost", $post)){
+        /*if(!Gate::allows("canEditPost", $post)){
             abort(403);
-        }
+        }*/
         // or use any one
         // Gate::authorize("canEditPost", $post);
 

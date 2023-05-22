@@ -23,7 +23,7 @@ Route::get('/', function () {
 })->name('site.home');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/posts/show/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('post.store');
